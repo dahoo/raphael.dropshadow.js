@@ -6,7 +6,7 @@ Based on [Raphael Blur Plugin](https://github.com/DmitryBaranovskiy/raphael/blob
 
 For each element:
 -----------------
-Use raphael.dropshadow.js.
+Use raphael.dropshadow.js
 
     el.dropShadow(2, 3, 3);
 
