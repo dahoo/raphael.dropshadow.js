@@ -6,15 +6,13 @@ Usage example:
 --------------
 
 Code:
-```
-paper.addDropShadowFilter(2, 3, 3);
-...
-element.setAttribute("class", "dropshadow");
-```
+
+    paper.addDropShadowFilter(2, 3, 3);
+    ...
+    element.setAttribute("class", "dropshadow");
 
 CSS:
-```
-.dropshadow {
-    filter: url(#dropshadow);
-}
-```
+
+    .dropshadow {
+      filter: url(#dropshadow);
+    }
