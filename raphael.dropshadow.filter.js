@@ -20,7 +20,7 @@
                 return document.createElementNS("http://www.w3.org/2000/svg", el);
             }
         };
-        Raphael.el.dropShadow = function (size, offsetX, offsetY) {
+        Raphael.fn.addDropShadowFilter = function (size, offsetX, offsetY) {
             if (size != "none") {
                 var fltr = $("filter"),
                     blur = $("feGaussianBlur"),
@@ -40,15 +40,13 @@
                 fltr.appendChild(merge);
                 merge.appendChild(mergeNodeShadow);
                 merge.appendChild(mergeNodeSource);
-                this.paper.defs.appendChild(fltr);
+                this.defs.appendChild(fltr);
                 this._blur = fltr;
-                $(this.node, {filter: "url(#" + fltr.id + ")"});
             } else {
                 if (this._blur) {
                     this._blur.parentNode.removeChild(this._blur);
                     delete this._blur;
                 }
-                this.node.removeAttribute("filter");
             }
         };
     }
