@@ -5,11 +5,16 @@ Based on [Raphael Blur Plugin](https://github.com/DmitryBaranovskiy/raphael/blob
 Usage example:
 --------------
 
+#For each element:
+
+    el.dropShadow(2, 3, 3);
+
+#For styling with CSS:
 Code:
 
     paper.addDropShadowFilter(2, 3, 3);
     ...
-    element.setAttribute("class", "dropshadow");
+    el.setAttribute("class", "dropshadow");
 
 CSS:
 
