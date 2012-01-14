@@ -6,11 +6,14 @@ Based on [Raphael Blur Plugin](https://github.com/DmitryBaranovskiy/raphael/blob
 
 For each element:
 -----------------
+Use raphael.dropshadow.js.
 
     el.dropShadow(2, 3, 3);
 
 For styling with CSS:
 ---------------------
+Use raphael.dropshadow.filter.js
+
 Code:
 
     paper.addDropShadowFilter(2, 3, 3);
