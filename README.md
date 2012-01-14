@@ -6,11 +6,11 @@ Usage example:
 --------------
 
 Code:
-    paper.addDropShadowFilter(2, 3, 3);
+    `paper.addDropShadowFilter(2, 3, 3);
     ...
-    element.setAttribute("class", "dropshadow");
+    element.setAttribute("class", "dropshadow");`
 
 CSS:
-   .dropshadow {
+   `.dropshadow {
        filter: url(#dropshadow);
-   }
+   }`
