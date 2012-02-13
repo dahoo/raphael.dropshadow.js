@@ -50,6 +50,7 @@
                 }
                 this.node.removeAttribute("filter");
             }
+            return this;
         };
     }
 })();
