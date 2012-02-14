@@ -18,7 +18,7 @@ Code:
 
     paper.addDropShadowFilter(2, 3, 3);
     ...
-    el.setAttribute("class", "dropshadow");
+    el.node.setAttribute("class", "dropshadow");
 
 CSS:
 
