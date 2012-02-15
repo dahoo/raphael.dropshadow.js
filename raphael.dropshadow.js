@@ -39,9 +39,7 @@
 					"height" : "130%",
 					"width" : "130%"
 				});
-				$(blur, {
-					stdDeviation : +size
-				});
+				$(blur, {"stdDeviation" : +size});
 				$(blur, {"in": "SourceAlpha"});
 				$(offset, {
 					"dx" : offsetX,
