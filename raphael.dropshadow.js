@@ -10,7 +10,12 @@
  */
 
 (function() {
-	if(!Raphael.vml) {
+	if(Raphael.vml) {
+		Raphael.el.dropShadow = function (size, offsetX, offsetY) {
+            // not supporting VML yet
+            return this; // maintain chainability
+        }
+	} else {
 		var $ = function(el, attr) {
 			if(attr) {
 				for(var key in attr)
@@ -62,13 +67,12 @@
 				}
 				this.node.removeAttribute("filter");
 			}
-			return this;
+			return this;  // maintain chainability
 		};
-
-		Raphael.st.dropShadow = function(size, offsetX, offsetY) {
+	}
+	Raphael.st.dropShadow = function(size, offsetX, offsetY) {
 			return this.forEach(function(el) {
 				el.dropShadow(size, offsetX, offsetY);
 			});
 		};
-	}
 })();
