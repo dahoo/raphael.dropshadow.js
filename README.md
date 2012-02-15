@@ -9,6 +9,12 @@ For each element:
 Use raphael.dropshadow.js
 
     el.dropShadow(2, 3, 3);
+    
+For sets:
+---------
+Use raphael.dropshadow.js
+
+    set.dropShadow(2, 3, 3);
 
 For styling with CSS:
 ---------------------
