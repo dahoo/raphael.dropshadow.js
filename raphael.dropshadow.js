@@ -23,23 +23,28 @@
 		};
 		Raphael.el.dropShadow = function(size, offsetX, offsetY) {
 			if(size != "none") {
-				var fltr = $("filter"), blur = $("feGaussianBlur"), offset = $("feOffset"), merge = $("feMerge"), mergeNodeShadow = $("feMergeNode"), mergeNodeSource = $("feMergeNode");
+				var fltr = $("filter"), 
+					blur = $("feGaussianBlur"), 
+					offset = $("feOffset"), 
+					merge = $("feMerge"), 
+					mergeNodeShadow = $("feMergeNode"), 
+					mergeNodeSource = $("feMergeNode");
 				fltr.id = "dropshadow";
 				$(fltr, {
-					height : "130%",
-					width : "130%"
+					"height" : "130%",
+					"width" : "130%"
 				});
 				$(blur, {
 					stdDeviation : +size
 				});
-				$(blur, {in: "SourceAlpha"});
+				$(blur, {"in": "SourceAlpha"});
 				$(offset, {
-					dx : offsetX,
-					dy : offsetY,
-					result : "offsetblur"
+					"dx" : offsetX,
+					"dy" : offsetY,
+					"result" : "offsetblur"
 				});
-				$(mergeNodeShadow, {in: "offsetblur"});
-				$(mergeNodeSource, {in: "SourceGraphic"});
+				$(mergeNodeShadow, {"in": "offsetblur"});
+				$(mergeNodeSource, {"in": "SourceGraphic"});
 				fltr.appendChild(blur);
 				fltr.appendChild(offset);
 				fltr.appendChild(merge);
@@ -48,7 +53,7 @@
 				this.paper.defs.appendChild(fltr);
 				this._blur = fltr;
 				$(this.node, {
-					filter : "url(#" + fltr.id + ")"
+					"filter" : "url(#" + fltr.id + ")"
 				});
 			} else {
 				if(this._blur) {
