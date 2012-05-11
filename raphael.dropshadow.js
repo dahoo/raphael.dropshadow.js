@@ -1,7 +1,7 @@
 /*!
  * Raphael Drop Shadow Plugin 0.1
  *
- * by Daniel Hoffmann
+ * by Daniel Hoffmann (with help from Garth Braithwaite)
  *
  * Based on Raphael Blur Plugin 0.1 by Dmitry Baranovskiy (http://raphaeljs.com)
  * https://github.com/DmitryBaranovskiy/raphael/blob/master/plugins/raphael.blur.js
@@ -11,7 +11,7 @@
 
 (function() {
 	if(Raphael.vml) {
-		Raphael.el.dropShadow = function (size, offsetX, offsetY) {
+		Raphael.el.dropShadow = function (size, offsetX, offsetY, opacity) {
             // not supporting VML yet
             return this; // maintain chainability
         }
@@ -26,10 +26,11 @@
 				return document.createElementNS("http://www.w3.org/2000/svg", el);
 			}
 		};
-		Raphael.el.dropShadow = function(size, offsetX, offsetY) {
+		Raphael.el.dropShadow = function(size, offsetX, offsetY, opacity) {
 			if(size != "none") {
 				var fltr = $("filter"), 
 					blur = $("feGaussianBlur"), 
+					colorMatrix = $("feColorMatrix"),
 					offset = $("feOffset"), 
 					merge = $("feMerge"), 
 					mergeNodeShadow = $("feMergeNode"), 
@@ -41,6 +42,11 @@
 				});
 				$(blur, {"stdDeviation" : +size});
 				$(blur, {"in": "SourceAlpha"});
+				$(colorMatrix, {
+					"result" : "bluralpha",
+					"type" : "bluralpha",
+					"values" : "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 "+opacity+" 0 "
+				});
 				$(offset, {
 					"dx" : offsetX,
 					"dy" : offsetY,
@@ -49,6 +55,7 @@
 				$(mergeNodeShadow, {"in": "offsetblur"});
 				$(mergeNodeSource, {"in": "SourceGraphic"});
 				fltr.appendChild(blur);
+				fltr.appendChild(colorMatrix);
 				fltr.appendChild(offset);
 				fltr.appendChild(merge);
 				merge.appendChild(mergeNodeShadow);
@@ -68,7 +75,7 @@
 			return this;  // maintain chainability
 		};
 	}
-	Raphael.st.dropShadow = function(size, offsetX, offsetY) {
+	Raphael.st.dropShadow = function(size, offsetX, offsetY, opacity) {
 			return this.forEach(function(el) {
 				el.dropShadow(size, offsetX, offsetY);
 			});

@@ -8,13 +8,13 @@ For each element:
 -----------------
 Use raphael.dropshadow.js
 
-    el.dropShadow(2, 3, 3);
+    el.dropShadow(2, 3, 3, 0.5); // dropShadow(size, offsetX, offsetY, opacity)
     
 For sets:
 ---------
 Use raphael.dropshadow.js
 
-    set.dropShadow(2, 3, 3);
+    set.dropShadow(2, 3, 3, 0.5);
 
 For styling with CSS:
 ---------------------
@@ -22,7 +22,7 @@ Use raphael.dropshadow.filter.js
 
 Code:
 
-    paper.addDropShadowFilter(2, 3, 3);
+    paper.addDropShadowFilter(2, 3, 3, 0.5);
     ...
     el.node.setAttribute("class", "dropshadow");
 
