@@ -20,10 +20,11 @@
                 return document.createElementNS("http://www.w3.org/2000/svg", el);
             }
         };
-        Raphael.fn.addDropShadowFilter = function (size, offsetX, offsetY) {
+        Raphael.fn.addDropShadowFilter = function (size, offsetX, offsetY, opacity) {
             if (size != "none") {
                 var fltr = $("filter"),
                     blur = $("feGaussianBlur"),
+                    colorMatrix = $("feColorMatrix"),
                     offset = $("feOffset"),
                     merge = $("feMerge"),
                     mergeNodeShadow = $("feMergeNode"),
@@ -32,10 +33,12 @@
                 $(fltr, {height: "130%", width: "130%"});
                 $(blur, {stdDeviation: +size});
                 $(blur, {in: "SourceAlpha"});
+                $(colorMatrix, {result: "bluralpha", type: "bluralpha", values: "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 "+opacity+" 0 "});
                 $(offset, {dx: offsetX, dy: offsetY, result: "offsetblur"});
                 $(mergeNodeShadow, {in: "offsetblur"});
                 $(mergeNodeSource, {in: "SourceGraphic"});
                 fltr.appendChild(blur);
+                fltr.appendChild(colorMatrix);
                 fltr.appendChild(offset);
                 fltr.appendChild(merge);
                 merge.appendChild(mergeNodeShadow);
