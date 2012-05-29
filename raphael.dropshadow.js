@@ -27,6 +27,7 @@
 			}
 		};
 		Raphael.el.dropShadow = function(size, offsetX, offsetY, opacity) {
+			opacity = opacity || 1;
 			if(size != "none") {
 				var fltr = $("filter"), 
 					blur = $("feGaussianBlur"), 
@@ -44,7 +45,7 @@
 				$(blur, {"in": "SourceAlpha"});
 				$(colorMatrix, {
 					"result" : "bluralpha",
-					"type" : "bluralpha",
+					"type" : "matrix",
 					"values" : "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 "+opacity+" 0 "
 				});
 				$(offset, {

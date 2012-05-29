@@ -8,7 +8,7 @@ For each element:
 -----------------
 Use raphael.dropshadow.js
 
-    el.dropShadow(2, 3, 3, 0.5); // dropShadow(size, offsetX, offsetY, opacity)
+    el.dropShadow(2, 3, 3, 0.5); // dropShadow(size, offsetX, offsetY, opacity = 1)
     
 For sets:
 ---------
