@@ -36,7 +36,7 @@
 					merge = $("feMerge"), 
 					mergeNodeShadow = $("feMergeNode"), 
 					mergeNodeSource = $("feMergeNode");
-				fltr.id = "dropshadow";
+				fltr.id = "dropshadow_" + Raphael.createUUID();
 				$(fltr, {
 					"height" : "130%",
 					"width" : "130%"
@@ -78,7 +78,7 @@
 	}
 	Raphael.st.dropShadow = function(size, offsetX, offsetY, opacity) {
 			return this.forEach(function(el) {
-				el.dropShadow(size, offsetX, offsetY);
+				el.dropShadow(size, offsetX, offsetY, opacity);
 			});
 		};
 })();

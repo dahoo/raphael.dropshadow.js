@@ -21,6 +21,7 @@
             }
         };
         Raphael.fn.addDropShadowFilter = function (size, offsetX, offsetY, opacity) {
+	    opacity = opacity || 1;
             if (size != "none") {
                 var fltr = $("filter"),
                     blur = $("feGaussianBlur"),
