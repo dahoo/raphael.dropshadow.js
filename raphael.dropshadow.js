@@ -9,6 +9,17 @@
  *
  */
 
+String.prototype.hashCode = function(){
+    var hash = 0, i, char;
+    if (this.length == 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+};
+
 (function() {
 	if(Raphael.vml) {
 		Raphael.el.dropShadow = function (size, offsetX, offsetY, opacity) {
@@ -30,39 +41,42 @@
 			opacity = opacity || 1;
 			if(size != "none") {
 				var fltr = $("filter"), 
-					blur = $("feGaussianBlur"), 
-					colorMatrix = $("feColorMatrix"),
-					offset = $("feOffset"), 
-					merge = $("feMerge"), 
-					mergeNodeShadow = $("feMergeNode"), 
-					mergeNodeSource = $("feMergeNode");
-				fltr.id = "dropshadow_" + Raphael.createUUID();
-				$(fltr, {
-					"height" : "130%",
-					"width" : "130%"
-				});
-				$(blur, {"stdDeviation" : +size});
-				$(blur, {"in": "SourceAlpha"});
-				$(colorMatrix, {
-					"result" : "bluralpha",
-					"type" : "matrix",
-					"values" : "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 "+opacity+" 0 "
-				});
-				$(offset, {
-					"dx" : offsetX,
-					"dy" : offsetY,
-					"result" : "offsetblur"
-				});
-				$(mergeNodeShadow, {"in": "offsetblur"});
-				$(mergeNodeSource, {"in": "SourceGraphic"});
-				fltr.appendChild(blur);
-				fltr.appendChild(colorMatrix);
-				fltr.appendChild(offset);
-				fltr.appendChild(merge);
-				merge.appendChild(mergeNodeShadow);
-				merge.appendChild(mergeNodeSource);
-				this.paper.defs.appendChild(fltr);
-				this._blur = fltr;
+				blur = $("feGaussianBlur"), 
+				colorMatrix = $("feColorMatrix"),
+				offset = $("feOffset"), 
+				merge = $("feMerge"), 
+				mergeNodeShadow = $("feMergeNode"), 
+				mergeNodeSource = $("feMergeNode");
+				fltr.id = "dropShadow_" + (""+size + " " + offsetX + " " + offsetY + " " + opacity).hashCode();
+				//If isn't set allready
+				if(document.getElementById(fltr.id) == null) {
+					$(fltr, {
+						"height" : "130%",
+						"width" : "130%"
+					});
+					$(blur, {"stdDeviation" : +size});
+					$(blur, {"in": "SourceAlpha"});
+					$(colorMatrix, {
+						"result" : "bluralpha",
+						"type" : "matrix",
+						"values" : "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 "+opacity+" 0 "
+					});
+					$(offset, {
+						"dx" : offsetX,
+						"dy" : offsetY,
+						"result" : "offsetblur"
+					});
+					$(mergeNodeShadow, {"in": "offsetblur"});
+					$(mergeNodeSource, {"in": "SourceGraphic"});
+					fltr.appendChild(blur);
+					fltr.appendChild(colorMatrix);
+					fltr.appendChild(offset);
+					fltr.appendChild(merge);
+					merge.appendChild(mergeNodeShadow);
+					merge.appendChild(mergeNodeSource);
+					this.paper.defs.appendChild(fltr);
+					this._blur = fltr;
+				}
 				$(this.node, {
 					"filter" : "url(#" + fltr.id + ")"
 				});
